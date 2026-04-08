@@ -1,4 +1,4 @@
-package srp;
+package Lesson01_SolidPrinciples.srp;
 
 public class Product {
     String name;
