@@ -1,4 +1,4 @@
-package Lesson01_SolidPrinciples.srp;
+package Lesson01_SolidPrinciples.ocp;
 
 import java.util.ArrayList;
 import Lesson01_SolidPrinciples.Product;
@@ -55,25 +55,35 @@ class ShoppingCartPrinter {
     }
 }
 
-class ShoppingCartStorage {
-    private ShoppingCart cart;
+interface ShoppingCartPersistence {
+    void save();
+}
 
-    public ShoppingCartStorage(ShoppingCart cart) {
-        this.cart = cart;
-    }
+// Violating OCP: Whenever a new kind of storage is introduced we have to modify
+// the existing class
 
-    public void saveToDatabase() {
-        // code to save the shopping cart to a database
-        // add a timer to simulate the time taken to save to the database
-        try {
-            Thread.sleep(2000); // simulate time taken to save to database
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+class SqlDbPersistence implements ShoppingCartPersistence {
+    @Override
+    public void save() {
+        System.out.println("Saving to sql db");
     }
 }
 
-public class Followed {
+class MongoDbPersistence implements ShoppingCartPersistence {
+    @Override
+    public void save() {
+        System.out.println("Saving to mongo db");
+    }
+}
+
+class FilePersistence implements ShoppingCartPersistence {
+    @Override
+    public void save() {
+        System.out.println("Saving to file system");
+    }
+}
+
+public class OCPFollowed {
     public static void main(String[] args) {
         ArrayList<Product> products = new ArrayList<>();
         products.add(new Product("Laptop", 999.99));
@@ -83,8 +93,13 @@ public class Followed {
         ShoppingCart cart = new ShoppingCart(products);
         System.out.println("Total: $" + cart.calculateTotal());
         ShoppingCartPrinter printer = new ShoppingCartPrinter(cart);
-        ShoppingCartStorage storage = new ShoppingCartStorage(cart);
+        ShoppingCartPersistence sqlStorage = new SqlDbPersistence();
+        ShoppingCartPersistence mongoStorage = new MongoDbPersistence();
+        ShoppingCartPersistence fileStorage = new FilePersistence();
+
         printer.printInvoice();
-        storage.saveToDatabase();
+        sqlStorage.save();
+        mongoStorage.save();
+        fileStorage.save();
     }
 }

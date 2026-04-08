@@ -1,6 +1,7 @@
 package Lesson01_SolidPrinciples.srp;
 
 import java.util.ArrayList;
+import Lesson01_SolidPrinciples.Product;
 
 class ShoppingCart {
     private ArrayList<Product> items;

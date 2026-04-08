@@ -1,4 +1,4 @@
-package Lesson01_SolidPrinciples.srp;
+package Lesson01_SolidPrinciples.ocp;
 
 import java.util.ArrayList;
 import Lesson01_SolidPrinciples.Product;
@@ -55,6 +55,8 @@ class ShoppingCartPrinter {
     }
 }
 
+// Violating OCP: Whenever a new kind of storage is introduced we have to modify
+// the existing class
 class ShoppingCartStorage {
     private ShoppingCart cart;
 
@@ -62,18 +64,20 @@ class ShoppingCartStorage {
         this.cart = cart;
     }
 
-    public void saveToDatabase() {
-        // code to save the shopping cart to a database
-        // add a timer to simulate the time taken to save to the database
-        try {
-            Thread.sleep(2000); // simulate time taken to save to database
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void saveToSQLDatabase() {
+        System.out.println("saving to sql db");
+    }
+
+    public void saveToMongoDB() {
+        System.out.println("Saving to mongo db");
+    }
+
+    public void saveToFileSystem() {
+        System.out.println("Saving to file system");
     }
 }
 
-public class Followed {
+public class OCPViolated {
     public static void main(String[] args) {
         ArrayList<Product> products = new ArrayList<>();
         products.add(new Product("Laptop", 999.99));
@@ -85,6 +89,8 @@ public class Followed {
         ShoppingCartPrinter printer = new ShoppingCartPrinter(cart);
         ShoppingCartStorage storage = new ShoppingCartStorage(cart);
         printer.printInvoice();
-        storage.saveToDatabase();
+        storage.saveToSQLDatabase();
+        storage.saveToMongoDB();
+        storage.saveToFileSystem();
     }
 }
