@@ -8,6 +8,7 @@ import java.nio.file.Path;
 
 public class DocumentEditor {
     ArrayList<String> elements = new ArrayList<>();
+    String renderedDocument = "";
 
     void addText(String text) {
         elements.add(text);
@@ -17,10 +18,21 @@ public class DocumentEditor {
         elements.add(path);
     }
 
-    void renderDocument() {
-        for (String element : elements) {
-            System.out.println(element);
+    String renderDocument() {
+        String result = "";
+        if (renderedDocument.isEmpty()) {
+
+            for (String element : elements) {
+                if (element.length() > 4
+                        && (element.substring(element.length() - 4, element.length()).equalsIgnoreCase(".jpg")
+                                || element.substring(element.length() - 4, element.length()).equalsIgnoreCase(".png")))
+                    result = result.concat("[Image:" + element + "]" + "\n");
+                else
+                    result = result.concat(element + "\n");
+            }
+            renderedDocument = result;
         }
+        return renderedDocument;
     }
 
     void saveToFile() {
