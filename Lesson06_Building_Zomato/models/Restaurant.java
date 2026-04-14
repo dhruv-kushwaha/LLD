@@ -3,17 +3,17 @@ package Lesson06_Building_Zomato.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Restraunt {
-    private static int nextRestrauntId = 0;
-    private int restrauntId;
+public class Restaurant {
+    private static int nextRestaurantId = 0;
+    private int restaurantId;
     private String name;
     private String location;
     private List<MenuItem> menu = new ArrayList<>();
 
-    public Restraunt(String name, String location) {
+    public Restaurant(String name, String location) {
         this.name = name;
         this.location = location;
-        restrauntId = ++nextRestrauntId;
+        restaurantId = ++nextRestaurantId;
     }
 
     public String getName() {

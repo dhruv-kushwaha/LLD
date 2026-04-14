@@ -3,16 +3,16 @@ package Lesson06_Building_Zomato.models;
 import java.util.ArrayList;
 
 public class Cart {
-    Restraunt restraunt;
+    Restaurant restaurant;
     ArrayList<MenuItem> items = new ArrayList<>();
 
     public Cart() {
-        restraunt = null;
+        restaurant = null;
     }
 
     public void addItems(MenuItem item) {
-        if (restraunt == null) {
-            System.err.println("Cart: Set a restraunt before adding items.");
+        if (restaurant == null) {
+            System.err.println("Cart: Set a restaurant before adding items.");
             return;
         }
         items.add(item);
@@ -31,16 +31,16 @@ public class Cart {
     }
 
     public void clear() {
-        restraunt = null;
+        restaurant = null;
         items.clear();
     }
 
-    public Restraunt getRestraunt() {
-        return restraunt;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setRestraunt(Restraunt restraunt) {
-        this.restraunt = restraunt;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     public ArrayList<MenuItem> getItems() {

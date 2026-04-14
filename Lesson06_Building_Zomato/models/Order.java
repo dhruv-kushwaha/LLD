@@ -1,5 +1,6 @@
 package Lesson06_Building_Zomato.models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,15 +10,16 @@ public abstract class Order {
     private static int _nextOrderId = 0;
 
     protected int orderId;
-    protected Restraunt restraunt;
+    protected Restaurant restaurant;
     protected User user;
     protected PaymentStrategy paymentStrategy;
     protected double total;
+    protected LocalDateTime scheduleTime;
     protected List<MenuItem> items = new ArrayList<>();
 
     public Order() {
         orderId = ++_nextOrderId;
-        restraunt = null;
+        restaurant = null;
         user = null;
         total = 0.0;
         paymentStrategy = null;
@@ -40,12 +42,12 @@ public abstract class Order {
         }
     }
 
-    public Restraunt getRestraunt() {
-        return restraunt;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setRestraunt(Restraunt restraunt) {
-        this.restraunt = restraunt;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     public User getUser() {
@@ -70,6 +72,14 @@ public abstract class Order {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public LocalDateTime getScheduleTime() {
+        return scheduleTime;
+    }
+
+    public void setScheduleTime(LocalDateTime scheduleTime) {
+        this.scheduleTime = scheduleTime;
     }
 
     public List<MenuItem> getItems() {

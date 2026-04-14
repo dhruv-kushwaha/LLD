@@ -1,10 +1,10 @@
 package Lesson06_Building_Zomato.models;
 
 public class PickupOrder extends Order {
-    private String restrauntAddress;
+    private String restaurantAddress;
 
     public PickupOrder() {
-        restrauntAddress = "";
+        restaurantAddress = "";
     }
 
     @Override
@@ -12,11 +12,11 @@ public class PickupOrder extends Order {
         return "Pickup";
     }
 
-    public String getRestrauntAddress() {
-        return restrauntAddress;
+    public String getRestaurantAddress() {
+        return restaurantAddress;
     }
 
-    public void setRestrauntAddress(String restrauntAddress) {
-        this.restrauntAddress = restrauntAddress;
+    public void setRestaurantAddress(String restaurantAddress) {
+        this.restaurantAddress = restaurantAddress;
     }
 }
