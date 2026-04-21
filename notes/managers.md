@@ -1,0 +1,11 @@
+System design mein entities ke liye managers hona kaafi important hota hai kyunki unka primary kaam **objects ko manage karna** hota hai, jaise ki unhe list mein add karna ya un par **CRUD (Create, Read, Update, Delete) operations** perform karna. 
+
+Managers ko entities se alag rakhne ke piche kai reasons hain:
+
+*   **Single Responsibility Principle (SRP):** Har class ki sirf ek hi responsibility honi chahiye. Agar ek entity (jaise `Song`) khud ko manage bhi karegi aur apna data bhi rakhegi, toh SRP break ho jayega. Entity ka kaam sirf apna data (jaise title, artist, path) hold karna hona chahiye, jabki manager ka kaam us entity ke lifecycle aur access ko handle karna hota hai.
+*   **Centralized Access aur Control:** Managers pure application ke liye ek **central point of contact** provide karte hain. For example, agar kisi ko koi playlist chahiye, toh wo `PlaylistManager` se maang sakta hai jo application mein exist karne wali saari playlists ko track karta hai.
+*   **Performance aur Organization:** Sources mein bataya gaya hai ki `PlaylistManager` ek **map store** karta hai taaki kisi playlist ko dhoondhna ek **Order of 1 (O(1)) operation** ban jaye. Agar ye logic entities ke andar hota, toh code kaafi messy aur inefficient ho jata.
+*   **Singleton Pattern ka Use:** Managers ko aksar **Singletons** banaya jata hai taaki puri application mein unka sirf ek hi instance rahe. Isse ye ensure hota hai ki pure system mein resources (jaise connected devices ya playlists) ka control ek hi jagah se ho.
+*   **Scalability aur Clean Code:** Manager classes hone se code **clean aur easily accessible** rehta hai. Jab naye features add karne hote hain, toh manager mein changes karna entities ke code ko chede bina zyada easy hota hai, jo application ko zyada scalable banata hai.
+
+Examples ke liye, `DeviceManager` ka kaam saare output devices ko connect aur manage karna hai, jabki `PlaylistManager` ka kaam playlists create karna aur unhe fetch karna hai. Is separation ki wajah se system ka flow maintain rehta hai aur components ke beech dependence kam ho jati hai.
